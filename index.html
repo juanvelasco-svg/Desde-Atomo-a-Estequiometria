@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Mental: Química del Átomo a la Estequiometría</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f7ff;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #1a237e, #3949ab);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-top: 5px solid #3949ab;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .card-icon {
+            font-size: 2rem;
+            color: #3949ab;
+            margin-right: 15px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e8eaf6;
+            border-radius: 50%;
+        }
+        
+        .card-title {
+            font-size: 1.6rem;
+            color: #1a237e;
+            font-weight: 700;
+        }
+        
+        .card-content {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .btn {
+            background-color: #3949ab;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background-color: #283593;
+        }
+        
+        .example-btn {
+            background-color: #00bcd4;
+        }
+        
+        .example-btn:hover {
+            background-color: #0097a7;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            color: #777;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        .modal-title {
+            color: #1a237e;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8eaf6;
+        }
+        
+        .example-container {
+            background-color: #f5f9ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #3949ab;
+        }
+        
+        .example-title {
+            color: #3949ab;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .interactive-container {
+            background-color: #e3f2fd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .input-group {
+            margin: 15px 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        
+        .calculate-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        .calculate-btn:hover {
+            background-color: #388e3c;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            border-left: 5px solid #4caf50;
+            display: none;
+        }
+        
+        .formula {
+            font-family: 'Courier New', monospace;
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .definition {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .key-point {
+            background-color: #fff3e0;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 12px 0;
+        }
+        
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f5f9ff;
+            border-radius: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .card {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        .atom-diagram {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        
+        .nucleus {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        .electron {
+            color: #1976d2;
+            font-weight: bold;
+        }
+        
+        .exercise {
+            background-color: #f0f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px dashed #3949ab;
+        }
+        
+        .hint {
+            background-color: #e8f5e9;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .show-hint {
+            background-color: #81c784;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .step-by-step {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #9c27b0;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: #9c27b0;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .comparison-table th {
+            background-color: #3949ab;
+            color: white;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f5f9ff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-atom"></i> Química: Del Átomo a la Estequiometría</h1>
+        <p class="subtitle">Mapa mental interactivo para estudiantes universitarios. Explora los conceptos fundamentales de la química con explicaciones claras, ejemplos y ejercicios interactivos.</p>
+    </header>
+    
+    <div class="container">
+        <!-- Tarjeta 1: Medir Átomos -->
+        <div class="card" id="medir-atomos-card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-weight-hanging"></i>
+                </div>
+                <h2 class="card-title">Medir Átomos</h2>
+            </div>
+            <div class="card-content">
+                <p>El átomo es la unidad básica de la materia. Para medir lo invisible, los químicos utilizan conceptos como número atómico (Z), número de masa (A) e isótopos.</p>
+                <div class="key-point">
+                    <strong>Clave:</strong> A = p⁺ + n⁰
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn" onclick="openModal('medir-atomos-modal')">
+                    <i class="fas fa-book-open"></i> Aprender
+                </button>
+                <button class="btn example-btn" onclick="openModal('medir-atomos-ejemplo-modal')">
+                    <i class="fas fa-flask"></i> Ejemplo
+                </button>
+            </div>
+        </div>
+        
+        <!-- Tarjeta 2: El Mol -->
+        <div class="card" id="mol-card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h2 class="card-title">El Mol</h2>
+            </div>
+            <div class="card-content">
+                <p>El mol es la unidad de cantidad de sustancia en el Sistema Internacional. Un mol contiene 6.022 × 10²³ partículas (número de Avogadro).</p>
+                <div class="key-point">
+                    <strong>Clave:</strong> 1 mol de ¹²C = 12 g = 6.022×10²³ átomos
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn" onclick="openModal('mol-modal')">
+                    <i class="fas fa-book-open"></i> Aprender
+                </button>
+                <button class="btn example-btn" onclick="openModal('mol-ejemplo-modal')">
+                    <i class="fas fa-flask"></i> Ejemplo
+                </button>
+            </div>
+        </div>
+        
+        <!-- Tarjeta 3: Fórmulas Químicas -->
+        <div class="card" id="formulas-card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-vial"></i>
+                </div>
+                <h2 class="card-title">Fórmulas Químicas</h2>
+            </div>
+            <div class="card-content">
+                <p>Las fórmulas químicas representan la composición de las sustancias. Diferenciamos entre fórmula empírica (mínima) y molecular (real).</p>
+                <div class="key-point">
+                    <strong>Clave:</strong> CH₂O (empírica) vs C₆H₁₂O₆ (molecular)
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn" onclick="openModal('formulas-modal')">
+                    <i class="fas fa-book-open"></i> Aprender
+                </button>
+                <button class="btn example-btn" onclick="openModal('formulas-ejemplo-modal')">
+                    <i class="fas fa-flask"></i> Ejemplo
+                </button>
+            </div>
+        </div>
+        
+        <!-- Tarjeta 4: Estequiometría -->
+        <div class="card" id="estequiometria-card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h2 class="card-title">Estequiometría</h2>
+            </div>
+            <div class="card-content">
+                <p>La estequiometría estudia las relaciones cuantitativas entre reactivos y productos en una reacción química.</p>
+                <div class="key-point">
+                    <strong>Clave:</strong> Coeficientes indican moles, no gramos
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn" onclick="openModal('estequiometria-modal')">
+                    <i class="fas fa-book-open"></i> Aprender
+                </button>
+                <button class="btn example-btn" onclick="openModal('estequiometria-ejemplo-modal')">
+                    <i class="fas fa-flask"></i> Ejemplo
+                </button>
+            </div>
+        </div>
+        
+        <!-- Tarjeta 5: Reactivo Limitante -->
+        <div class="card" id="limitante-card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-hourglass-half"></i>
+                </div>
+                <h2 class="card-title">Reactivo Limitante</h2>
+            </div>
+            <div class="card-content">
+                <p>En una reacción química, el reactivo limitante es el que se consume primero, determinando la cantidad máxima de producto que se puede formar.</p>
+                <div class="key-point">
+                    <strong>Clave:</strong> Divide moles reales entre coeficiente
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn" onclick="openModal('limitante-modal')">
+                    <i class="fas fa-book-open"></i> Aprender
+                </button>
+                <button class="btn example-btn" onclick="openModal('limitante-ejemplo-modal')">
+                    <i class="fas fa-flask"></i> Ejemplo
+                </button>
+            </div>
+        </div>
+        
+        <!-- Tarjeta 6: Rendimiento -->
+        <div class="card" id="rendimiento-card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h2 class="card-title">Rendimiento</h2>
+            </div>
+            <div class="card-content">
+                <p>Compara la cantidad de producto obtenida experimentalmente con la cantidad máxima teórica esperada.</p>
+                <div class="key-point">
+                    <strong>Clave:</strong> % Rendimiento = (Exp/Teórico) × 100
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn" onclick="openModal('rendimiento-modal')">
+                    <i class="fas fa-book-open"></i> Aprender
+                </button>
+                <button class="btn example-btn" onclick="openModal('rendimiento-ejemplo-modal')">
+                    <i class="fas fa-flask"></i> Ejemplo
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- =========== MODALES DE TEORÍA =========== -->
+    
+    <!-- Modal para Medir Átomos (Teoría) -->
+    <div id="medir-atomos-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('medir-atomos-modal')">&times;</span>
+            <h2 class="modal-title">Medir Átomos</h2>
+            
+            <div class="definition">
+                <h3>Número Atómico (Z)</h3>
+                <p>Es el "DNI" del elemento. Indica el número de protones en el núcleo. Si cambias Z, cambias el elemento.</p>
+            </div>
+            
+            <div class="definition">
+                <h3>Número de Masa (A)</h3>
+                <p>Es el peso total del núcleo. Suma de protones (p⁺) y neutrones (n⁰).</p>
+                <div class="formula">A = p⁺ + n⁰</div>
+                <p>Por lo tanto: n⁰ = A - Z</p>
+            </div>
+            
+            <div class="definition">
+                <h3>Isótopos</h3>
+                <p>Átomos de un mismo elemento (mismo Z) pero con diferente número de neutrones, por lo tanto diferente A.</p>
+            </div>
+            
+            <div class="diagram">
+                <h3>Representación de un Átomo</h3>
+                <div class="atom-diagram">
+                    <p><span class="nucleus">Núcleo</span>: Protones (p⁺) + Neutrones (n⁰)</p>
+                    <p><span class="electron">Electrones</span>: Nube electrónica (1-5 Å)</p>
+                    <p>El núcleo concentra casi toda la masa, pero la nube electrónica determina el tamaño.</p>
+                </div>
+            </div>
+            
+            <div class="key-point">
+                <h3>Unidad de Masa Atómica (uma)</h3>
+                <p>La uma se define como 1/12 de la masa de un átomo de carbono-12.</p>
+                <div class="formula">1 uma = 1/12 × masa(¹²C) = 1.660539 × 10⁻²⁷ kg</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para El Mol (Teoría) -->
+    <div id="mol-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('mol-modal')">&times;</span>
+            <h2 class="modal-title">El Mol: La Docena del Químico</h2>
+            
+            <div class="definition">
+                <h3>Número de Avogadro (N<sub>A</sub>)</h3>
+                <p>N<sub>A</sub> = 6.022 × 10²³ partículas/mol</p>
+                <p>Es la cantidad de átomos en 12 gramos de carbono-12.</p>
+            </div>
+            
+            <div class="definition">
+                <h3>El Mol</h3>
+                <p>Un mol es la cantidad de sustancia que contiene N<sub>A</sub> partículas elementales (átomos, moléculas, iones, etc.).</p>
+            </div>
+            
+            <div class="definition">
+                <h3>Masa Molar (M)</h3>
+                <p>Es la masa de un mol de sustancia. Se expresa en g/mol.</p>
+                <p>La masa molar numéricamente es igual a la masa molecular en uma.</p>
+            </div>
+            
+            <div class="key-point">
+                <h3>Comparación: Masa Molecular vs Masa Molar</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Concepto</th>
+                        <th>¿Qué mide?</th>
+                        <th>Unidad</th>
+                    </tr>
+                    <tr>
+                        <td>Masa Molecular</td>
+                        <td>Masa de UNA molécula</td>
+                        <td>uma</td>
+                    </tr>
+                    <tr>
+                        <td>Masa Molar</td>
+                        <td>Masa de UN MOL de moléculas</td>
+                        <td>g/mol</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para Fórmulas Químicas (Teoría) -->
+    <div id="formulas-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('formulas-modal')">&times;</span>
+            <h2 class="modal-title">Fórmulas Químicas</h2>
+            
+            <div class="definition">
+                <h3>Fórmula Empírica (Mínima)</h3>
+                <p>Representa la proporción más simple de átomos en un compuesto.</p>
+                <p>Ejemplo: CH₂O para la glucosa.</p>
+            </div>
+            
+            <div class="definition">
+                <h3>Fórmula Molecular</h3>
+                <p>Indica el número real de átomos de cada elemento en una molécula.</p>
+                <p>Ejemplo: C₆H₁₂O₆ para la glucosa.</p>
+                <p>Es un múltiplo entero de la fórmula empírica.</p>
+                <div class="formula">Fórmula Molecular = n × Fórmula Empírica</div>
+            </div>
+            
+            <div class="key-point">
+                <h3>Composición Centesimal</h3>
+                <p>Es el porcentaje en masa de cada elemento en un compuesto.</p>
+                <div class="formula">% Elemento = (masa del elemento / masa total del compuesto) × 100</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para Estequiometría (Teoría) -->
+    <div id="estequiometria-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('estequiometria-modal')">&times;</span>
+            <h2 class="modal-title">Estequiometría: La Receta Química</h2>
+            
+            <div class="definition">
+                <h3>¿Qué es la Estequiometría?</h3>
+                <p>Es el cálculo de las relaciones cuantitativas entre reactivos y productos en una reacción química.</p>
+                <p>Los coeficientes en una ecuación balanceada indican moles, no gramos.</p>
+            </div>
+            
+            <div class="diagram">
+                <h3>Mapa de Ruta Estequiométrico</h3>
+                <p>Nunca calcules gramos → gramos directamente. Sigue estos pasos:</p>
+                <div class="formula">Masa A → Moles A → Moles B → Masa B</div>
+                <p>Donde A y B son diferentes sustancias en la reacción.</p>
+            </div>
+            
+            <div class="key-point">
+                <h3>Relaciones en una Reacción Química</h3>
+                <p>Para la reacción: aA + bB → cC + dD</p>
+                <ul>
+                    <li>Relación de moles: a mol A : b mol B : c mol C : d mol D</li>
+                    <li>Relación de masas: a×M_A g A : b×M_B g B : c×M_C g C : d×M_D g D</li>
+                    <li>Para gases: a vol A : b vol B : c vol C : d vol D (a mismas condiciones de P y T)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para Reactivo Limitante (Teoría) -->
+    <div id="limitante-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('limitante-modal')">&times;</span>
+            <h2 class="modal-title">Reactivo Limitante</h2>
+            
+            <div class="definition">
+                <h3>¿Qué es el Reactivo Limitante?</h3>
+                <p>Es el reactivo que se consume completamente en una reacción, determinando la cantidad máxima de producto que se puede formar.</p>
+                <p>La reacción se detiene cuando se agota este ingrediente esencial.</p>
+            </div>
+            
+            <div class="definition">
+                <h3>Método para Identificar el Reactivo Limitante</h3>
+                <ol>
+                    <li>Calcula los moles disponibles de cada reactivo.</li>
+                    <li>Divide los moles reales entre el coeficiente estequiométrico de cada reactivo.</li>
+                    <li>El reactivo con el menor cociente es el limitante.</li>
+                </ol>
+            </div>
+            
+            <div class="key-point">
+                <h3>Reactivo en Exceso</h3>
+                <p>Es el reactivo que sobra después de que se completa la reacción. Para calcular cuánto sobra:</p>
+                <div class="formula">Moles en exceso = Moles iniciales - Moles que reaccionaron</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para Rendimiento (Teoría) -->
+    <div id="rendimiento-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('rendimiento-modal')">&times;</span>
+            <h2 class="modal-title">Rendimiento: Teoría vs. Realidad</h2>
+            
+            <div class="definition">
+                <h3>Rendimiento Teórico</h3>
+                <p>Es la cantidad máxima de producto que se puede obtener según los cálculos estequiométricos, suponiendo una reacción completa y sin pérdidas.</p>
+            </div>
+            
+            <div class="definition">
+                <h3>Rendimiento Experimental (Real)</h3>
+                <p>Es la cantidad de producto que realmente se obtiene en el laboratorio.</p>
+            </div>
+            
+            <div class="definition">
+                <h3>Rendimiento Porcentual</h3>
+                <div class="formula">% Rendimiento = (Rendimiento Experimental / Rendimiento Teórico) × 100</div>
+            </div>
+            
+            <div class="key-point">
+                <h3>Causas de Bajo Rendimiento</h3>
+                <ul>
+                    <li>Impurezas en los reactivos</li>
+                    <li>Reacciones secundarias no deseadas</li>
+                    <li>Pérdidas mecánicas durante el manejo</li>
+                    <li>Reacciones reversibles que no llegan a completarse</li>
+                    <li>Condiciones de reacción no óptimas</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- =========== MODALES DE EJEMPLOS =========== -->
+    
+    <!-- Modal de Ejemplo para Medir Átomos -->
+    <div id="medir-atomos-ejemplo-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('medir-atomos-ejemplo-modal')">&times;</span>
+            <h2 class="modal-title">Ejemplos: Medir Átomos</h2>
+            
+            <div class="example-container">
+                <h3 class="example-title">Ejemplo 1: Isótopos del Cloro</h3>
+                <p>El cloro en la naturaleza se presenta como dos isótopos:</p>
+                <ul>
+                    <li>³⁵Cl: masa = 34.9689 uma, abundancia = 75.53%</li>
+                    <li>³⁷Cl: masa = 36.9659 uma, abundancia = 24.47%</li>
+                </ul>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">1</span> Convertir porcentajes a fracción decimal:</p>
+                    <p>75.53% = 0.7553, 24.47% = 0.2447</p>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">2</span> Calcular masa promedio:</p>
+                    <div class="formula">Masa promedio = (34.9689 × 0.7553) + (36.9659 × 0.2447)</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">3</span> Realizar cálculo:</p>
+                    <div class="formula">Masa promedio = 26.41 + 9.04 = 35.45 uma</div>
+                </div>
+                
+                <p><strong>Resultado:</strong> La masa atómica del cloro en la tabla periódica es 35.45 uma.</p>
+            </div>
+            
+            <div class="example-container">
+                <h3 class="example-title">Ejemplo 2: Determinar protones, neutrones y electrones</h3>
+                <p>Para el isótopo <sup>23</sup>Na<sup>+</sup> (ion sodio con carga +1):</p>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">1</span> Encontrar Z (número atómico) en tabla periódica:</p>
+                    <p>Para Na (sodio), Z = 11</p>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">2</span> Calcular neutrones:</p>
+                    <div class="formula">n⁰ = A - Z = 23 - 11 = 12 neutrones</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">3</span> Calcular electrones:</p>
+                    <p>Átomo neutro de Na: electrones = protones = 11</p>
+                    <p>Ión Na<sup>+</sup>: pierde 1 electrón → 11 - 1 = 10 electrones</p>
+                </div>
+                
+                <p><strong>Resultado:</strong> <sup>23</sup>Na<sup>+</sup> tiene 11 protones, 12 neutrones y 10 electrones.</p>
+            </div>
+            
+            <div class="interactive-container">
+                <h3>Calculadora de Masa Atómica Promedio</h3>
+                <p>Calcula la masa atómica promedio de un elemento con hasta 3 isótopos:</p>
+                
+                <div class="input-group">
+                    <label for="iso1-mass">Masa Isótopo 1 (uma):</label>
+                    <input type="number" id="iso1-mass" value="34.9689" step="0.0001">
+                </div>
+                <div class="input-group">
+                    <label for="iso1-abun">Abundancia Isótopo 1 (%):</label>
+                    <input type="number" id="iso1-abun" value="75.53" step="0.01">
+                </div>
+                
+                <div class="input-group">
+                    <label for="iso2-mass">Masa Isótopo 2 (uma):</label>
+                    <input type="number" id="iso2-mass" value="36.9659" step="0.0001">
+                </div>
+                <div class="input-group">
+                    <label for="iso2-abun">Abundancia Isótopo 2 (%):</label>
+                    <input type="number" id="iso2-abun" value="24.47" step="0.01">
+                </div>
+                
+                <div class="input-group">
+                    <label for="iso3-mass">Masa Isótopo 3 (uma):</label>
+                    <input type="number" id="iso3-mass" value="" step="0.0001" placeholder="Opcional">
+                </div>
+                <div class="input-group">
+                    <label for="iso3-abun">Abundancia Isótopo 3 (%):</label>
+                    <input type="number" id="iso3-abun" value="" step="0.01" placeholder="Opcional">
+                </div>
+                
+                <button class="calculate-btn" onclick="calculateAtomicMass()">Calcular Masa Atómica Promedio</button>
+                <div class="result" id="atomic-mass-result">
+                    <h4>Resultado:</h4>
+                    <p id="atomic-mass-value"></p>
+                </div>
+            </div>
+            
+            <div class="exercise">
+                <h3>Ejercicio Práctico</h3>
+                <p>El cobre tiene dos isótopos naturales: <sup>63</sup>Cu (masa 62.9296 uma, abundancia 69.17%) y <sup>65</sup>Cu (masa 64.9278 uma).</p>
+                <p>a) Calcula la abundancia del isótopo <sup>65</sup>Cu.</p>
+                <p>b) Calcula la masa atómica promedio del cobre.</p>
+                <button class="show-hint" onclick="showHint('atom-exercise-hint')">Mostrar solución</button>
+                <div class="hint" id="atom-exercise-hint">
+                    <p><strong>Solución:</strong></p>
+                    <p>a) Abundancia total = 100%, por tanto: abundancia(<sup>65</sup>Cu) = 100% - 69.17% = 30.83%</p>
+                    <p>b) Masa promedio = (62.9296 × 0.6917) + (64.9278 × 0.3083) = 43.52 + 20.01 = 63.53 uma</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Ejemplo para El Mol -->
+    <div id="mol-ejemplo-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('mol-ejemplo-modal')">&times;</span>
+            <h2 class="modal-title">Ejemplos: El Mol y la Masa Molar</h2>
+            
+            <div class="example-container">
+                <h3 class="example-title">Ejemplo 1: Masa Molar del Agua (H₂O)</h3>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">1</span> Identificar los elementos y sus masas atómicas:</p>
+                    <p>Hidrógeno (H): 1.008 g/mol, Oxígeno (O): 16.00 g/mol</p>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">2</span> Contar átomos de cada elemento en la fórmula:</p>
+                    <p>H₂O tiene 2 átomos de H y 1 átomo de O</p>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">3</span> Calcular masa molar:</p>
+                    <div class="formula">M(H₂O) = (2 × 1.008) + (1 × 16.00) = 2.016 + 16.00 = 18.016 g/mol</div>
+                </div>
+                
+                <p><strong>Interpretación:</strong> 1 mol de H₂O = 18.016 g = 6.022×10²³ moléculas de H₂O</p>
+            </div>
+            
+            <div class="example-container">
+                <h3 class="example-title">Ejemplo 2: Conversión entre masa y moles</h3>
+                <p>¿Cuántos moles hay en 50.0 g de dióxido de carbono (CO₂)?</p>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">1</span> Calcular masa molar del CO₂:</p>
+                    <p>C: 12.01 g/mol, O: 16.00 g/mol</p>
+                    <div class="formula">M(CO₂) = 12.01 + (2 × 16.00) = 12.01 + 32.00 = 44.01 g/mol</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">2</span> Aplicar fórmula:</p>
+                    <div class="formula">n = masa / M = 50.0 g / 44.01 g/mol = 1.136 moles</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">3</span> Calcular número de moléculas:</p>
+                    <div class="formula">N = n × Nₐ = 1.136 mol × 6.022×10²³ moléculas/mol = 6.84×10²³ moléculas</div>
+                </div>
+            </div>
+            
+            <div class="interactive-container">
+                <h3>Calculadora de Conversiones</h3>
+                <p>Realiza conversiones entre masa, moles y número de partículas:</p>
+                
+                <div class="input-group">
+                    <label for="conversion-type">Tipo de conversión:</label>
+                    <select id="conversion-type">
+                        <option value="mass-to-moles">Masa → Moles</option>
+                        <option value="moles-to-mass">Moles → Masa</option>
+                        <option value="mass-to-particles">Masa → Partículas</option>
+                        <option value="moles-to-particles">Moles → Partículas</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="input-value">Valor de entrada:</label>
+                    <input type="number" id="input-value" value="36" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label for="molar-mass-value">Masa molar (g/mol):</label>
+                    <input type="number" id="molar-mass-value" value="18" step="0.1">
+                </div>
+                
+                <button class="calculate-btn" onclick="performMoleConversion()">Realizar Conversión</button>
+                <div class="result" id="conversion-result">
+                    <h4>Resultado:</h4>
+                    <p id="conversion-value"></p>
+                </div>
+            </div>
+            
+            <div class="exercise">
+                <h3>Ejercicio Práctico</h3>
+                <p>El sulfato de cobre(II) pentahidratado (CuSO₄·5H₂O) se usa como fungicida.</p>
+                <p>a) Calcula su masa molar (masas atómicas: Cu=63.5, S=32.1, O=16.0, H=1.0).</p>
+                <p>b) ¿Cuántos moles hay en 125 g de esta sustancia?</p>
+                <p>c) ¿Cuántas moléculas de agua hay en 125 g del compuesto?</p>
+                <button class="show-hint" onclick="showHint('mole-exercise-hint')">Mostrar solución</button>
+                <div class="hint" id="mole-exercise-hint">
+                    <p><strong>Solución:</strong></p>
+                    <p>a) M(CuSO₄·5H₂O) = 63.5 + 32.1 + (4×16.0) + 5×(2×1.0 + 16.0) = 63.5 + 32.1 + 64.0 + 5×18.0 = 63.5 + 32.1 + 64.0 + 90.0 = 249.6 g/mol</p>
+                    <p>b) n = 125 g / 249.6 g/mol = 0.501 moles</p>
+                    <p>c) En 1 molécula de CuSO₄·5H₂O hay 5 moléculas de H₂O, por tanto: moléculas H₂O = 0.501 mol × 6.022×10²³ moléculas/mol × 5 = 1.51×10²⁴ moléculas de H₂O</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Ejemplo para Fórmulas Químicas -->
+    <div id="formulas-ejemplo-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('formulas-ejemplo-modal')">&times;</span>
+            <h2 class="modal-title">Ejemplos: Fórmulas Químicas</h2>
+            
+            <div class="example-container">
+                <h3 class="example-title">Ejemplo 1: Determinar fórmula empírica</h3>
+                <p>Un compuesto contiene 40.0% de carbono, 6.7% de hidrógeno y 53.3% de oxígeno en masa.</p>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">1</span> Tomar 100 g del compuesto:</p>
+                    <p>C: 40.0 g, H: 6.7 g, O: 53.3 g</p>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">2</span> Convertir a moles:</p>
+                    <div class="formula">C: 40.0 g / 12.0 g/mol = 3.33 mol</div>
+                    <div class="formula">H: 6.7 g / 1.0 g/mol = 6.7 mol</div>
+                    <div class="formula">O: 53.3 g / 16.0 g/mol = 3.33 mol</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">3</span> Dividir entre el menor valor:</p>
+                    <div class="formula">C: 3.33 / 3.33 = 1.0</div>
+                    <div class="formula">H: 6.7 / 3.33 = 2.0</div>
+                    <div class="formula">O: 3.33 / 3.33 = 1.0</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">4</span> Escribir fórmula empírica:</p>
+                    <div class="formula">Fórmula empírica: CH₂O</div>
+                </div>
+            </div>
+            
+            <div class="example-container">
+                <h3 class="example-title">Ejemplo 2: Determinar fórmula molecular</h3>
+                <p>Para el compuesto anterior (CH₂O), si su masa molar es 180 g/mol, ¿cuál es su fórmula molecular?</p>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">1</span> Calcular masa de la fórmula empírica:</p>
+                    <div class="formula">M(CH₂O) = 12.0 + (2×1.0) + 16.0 = 30.0 g/mol</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">2</span> Calcular factor n:</p>
+                    <div class="formula">n = Masa molar real / Masa fórmula empírica = 180 g/mol / 30.0 g/mol = 6</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">3</span> Multiplicar fórmula empírica por n:</p>
+                    <div class="formula">Fórmula molecular = (CH₂O) × 6 = C₆H₁₂O₆</div>
+                </div>
+                
+                <p><strong>Nota:</strong> Este es el azúcar glucosa.</p>
+            </div>
+            
+            <div class="interactive-container">
+                <h3>Calculadora de Composición Centesimal</h3>
+                <p>Calcula el porcentaje en masa de cada elemento en un compuesto:</p>
+                
+                <div class="input-group">
+                    <label for="compound-formula">Fórmula del compuesto:</label>
+                    <input type="text" id="compound-formula" value="H2O" placeholder="Ej: H2O, C6H12O6, NaCl">
+                </div>
+                
+                <button class="calculate-btn" onclick="calculatePercentComposition()">Calcular Composición</button>
+                <div class="result" id="composition-result">
+                    <h4>Resultado:</h4>
+                    <div id="composition-value"></div>
+                </div>
+            </div>
+            
+            <div class="exercise">
+                <h3>Ejercicio Práctico: Análisis de Combustión</h3>
+                <p>La combustión de 0.500 g de un hidrocarburo produce 1.548 g de CO₂ y 0.634 g de H₂O.</p>
+                <p>a) Calcula la composición porcentual del hidrocarburo.</p>
+                <p>b) Determina su fórmula empírica.</p>
+                <p>c) Si su masa molar es 78 g/mol, ¿cuál es su fórmula molecular?</p>
+                <button class="show-hint" onclick="showHint('formula-exercise-hint')">Mostrar solución paso a paso</button>
+                <div class="hint" id="formula-exercise-hint">
+                    <p><strong>Solución paso a paso:</strong></p>
+                    <p>a) Del CO₂: masa C = (1.548 g CO₂) × (12.0 g C / 44.0 g CO₂) = 0.422 g C</p>
+                    <p>Del H₂O: masa H = (0.634 g H₂O) × (2.0 g H / 18.0 g H₂O) = 0.070 g H</p>
+                    <p>%C = (0.422 g / 0.500 g) × 100% = 84.4%</p>
+                    <p>%H = (0.070 g / 0.500 g) × 100% = 14.0% (el 1.6% restante podría ser error experimental)</p>
+                    <p>b) Para 100 g: C: 84.4/12.0 = 7.03 mol, H: 14.0/1.0 = 14.0 mol</p>
+                    <p>Dividir entre 7.03: C: 1, H: 2 → Fórmula empírica: CH₂ (masa = 14 g/mol)</p>
+                    <p>c) n = 78 g/mol / 14 g/mol = 5.57 ≈ 6</p>
+                    <p>Fórmula molecular: (CH₂) × 6 = C₆H₁₂</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Ejemplo para Estequiometría -->
+    <div id="estequiometria-ejemplo-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('estequiometria-ejemplo-modal')">&times;</span>
+            <h2 class="modal-title">Ejemplos: Cálculos Estequiométricos</h2>
+            
+            <div class="example-container">
+                <h3 class="example-title">Ejemplo 1: Cálculo de masa a masa</h3>
+                <p>¿Qué masa de oxígeno (O₂) se necesita para quemar completamente 46 g de etanol (C₂H₅OH)?</p>
+                <div class="formula">C₂H₅OH + 3O₂ → 2CO₂ + 3H₂O</div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">1</span> Balancear ecuación (ya está balanceada)</p>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">2</span> Calcular masa molar:</p>
+                    <p>M(C₂H₅OH) = (2×12) + (6×1) + 16 = 46 g/mol</p>
+                    <p>M(O₂) = 2×16 = 32 g/mol</p>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">3</span> Convertir masa a moles:</p>
+                    <div class="formula">n(C₂H₅OH) = 46 g / 46 g/mol = 1.0 mol</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">4</span> Usar relación molar de la ecuación:</p>
+                    <p>1 mol C₂H₅OH requiere 3 mol O₂</p>
+                    <div class="formula">n(O₂) = 1.0 mol × (3 mol O₂ / 1 mol C₂H₅OH) = 3.0 mol</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">5</span> Convertir moles a masa:</p>
+                    <div class="formula">m(O₂) = 3.0 mol × 32 g/mol = 96 g</div>
+                </div>
+                
+                <p><strong>Respuesta:</strong> Se necesitan 96 g de O₂.</p>
+            </div>
+            
+            <div class="example-container">
+                <h3 class="example-title">Ejemplo 2: Cálculo de volumen de gases</h3>
+                <p>¿Qué volumen de CO₂ (en condiciones normales) se produce al reaccionar 10 g de CaCO₃ con HCl?</p>
+                <div class="formula">CaCO₃ + 2HCl → CaCl₂ + CO₂ + H₂O</div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">1</span> Calcular masa molar:</p>
+                    <p>M(CaCO₃) = 40 + 12 + (3×16) = 100 g/mol</p>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">2</span> Convertir masa a moles:</p>
+                    <div class="formula">n(CaCO₃) = 10 g / 100 g/mol = 0.1 mol</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">3</span> Usar relación molar:</p>
+                    <p>1 mol CaCO₃ produce 1 mol CO₂</p>
+                    <div class="formula">n(CO₂) = 0.1 mol</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">4</span> Usar volumen molar (22.4 L/mol en CN):</p>
+                    <div class="formula">V(CO₂) = 0.1 mol × 22.4 L/mol = 2.24 L</div>
+                </div>
+                
+                <p><strong>Respuesta:</strong> Se producen 2.24 L de CO₂ en condiciones normales.</p>
+            </div>
+            
+            <div class="interactive-container">
+                <h3>Calculadora Estequiométrica</h3>
+                <p>Para la reacción: N₂ + 3H₂ → 2NH₃ (Haber-Bosch)</p>
+                
+                <div class="input-group">
+                    <label for="stoich-mass">Masa de reactivo (g):</label>
+                    <input type="number" id="stoich-mass" value="28" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label for="reactant-type">Reactivo de entrada:</label>
+                    <select id="reactant-type">
+                        <option value="N2">N₂ (M=28 g/mol)</option>
+                        <option value="H2">H₂ (M=2 g/mol)</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="product-type">Producto a calcular:</label>
+                    <select id="product-type">
+                        <option value="NH3">NH₃ (M=17 g/mol)</option>
+                        <option value="other-reactant">Otro reactivo</option>
+                    </select>
+                </div>
+                
+                <button class="calculate-btn" onclick="calculateStoichiometry()">Calcular</button>
+                <div class="result" id="stoichiometry-result">
+                    <h4>Resultado:</h4>
+                    <p id="stoichiometry-value"></p>
+                </div>
+            </div>
+            
+            <div class="exercise">
+                <h3>Ejercicio Práctico: Síntesis del amoníaco</h3>
+                <p>En el proceso Haber-Bosch: N₂(g) + 3H₂(g) → 2NH₃(g)</p>
+                <p>a) ¿Cuántos gramos de amoníaco se producen a partir de 50 g de N₂?</p>
+                <p>b) ¿Qué volumen de H₂ (en CN) se necesita para esa reacción?</p>
+                <p>c) Si el rendimiento real es 45 g de NH₃, ¿cuál es el rendimiento porcentual?</p>
+                <button class="show-hint" onclick="showHint('stoich-exercise-hint')">Mostrar solución</button>
+                <div class="hint" id="stoich-exercise-hint">
+                    <p><strong>Solución:</strong></p>
+                    <p>a) n(N₂) = 50 g / 28 g/mol = 1.786 mol</p>
+                    <p>Relación: 1 mol N₂ produce 2 mol NH₃ → n(NH₃) = 1.786 × 2 = 3.572 mol</p>
+                    <p>m(NH₃) = 3.572 mol × 17 g/mol = 60.7 g (rendimiento teórico)</p>
+                    <p>b) Relación: 1 mol N₂ requiere 3 mol H₂ → n(H₂) = 1.786 × 3 = 5.358 mol</p>
+                    <p>V(H₂) = 5.358 mol × 22.4 L/mol = 120 L (en CN)</p>
+                    <p>c) % Rendimiento = (45 g / 60.7 g) × 100% = 74.1%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Ejemplo para Reactivo Limitante -->
+    <div id="limitante-ejemplo-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('limitante-ejemplo-modal')">&times;</span>
+            <h2 class="modal-title">Ejemplos: Reactivo Limitante</h2>
+            
+            <div class="example-container">
+                <h3 class="example-title">Ejemplo 1: Síntesis del agua</h3>
+                <p>Se hacen reaccionar 10 g de H₂ con 64 g de O₂ para formar agua:</p>
+                <div class="formula">2H₂ + O₂ → 2H₂O</div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">1</span> Calcular moles de cada reactivo:</p>
+                    <div class="formula">n(H₂) = 10 g / 2 g/mol = 5.0 mol</div>
+                    <div class="formula">n(O₂) = 64 g / 32 g/mol = 2.0 mol</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">2</span> Dividir moles entre coeficiente:</p>
+                    <div class="formula">H₂: 5.0 mol / 2 = 2.5</div>
+                    <div class="formula">O₂: 2.0 mol / 1 = 2.0</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">3</span> Identificar reactivo limitante:</p>
+                    <p>O₂ tiene el cociente menor (2.0 < 2.5), por tanto O₂ es el reactivo limitante.</p>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">4</span> Calcular producto basado en el limitante:</p>
+                    <p>1 mol O₂ produce 2 mol H₂O → n(H₂O) = 2.0 × 2 = 4.0 mol</p>
+                    <div class="formula">m(H₂O) = 4.0 mol × 18 g/mol = 72 g</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">5</span> Calcular exceso de H₂:</p>
+                    <p>2.0 mol O₂ reaccionan con 4.0 mol H₂ (relación 1:2)</p>
+                    <p>H₂ inicial: 5.0 mol, H₂ que reacciona: 4.0 mol, H₂ en exceso: 1.0 mol = 2 g</p>
+                </div>
+                
+                <p><strong>Resumen:</strong> Se producen 72 g de H₂O y sobran 2 g de H₂.</p>
+            </div>
+            
+            <div class="example-container">
+                <h3 class="example-title">Ejemplo 2: Reacción con tres reactivos</h3>
+                <p>Para la reacción: 2Al + 3Cl₂ + 6NaOH → 2Na₃AlO₃ + 6NaCl + 3H₂O</p>
+                <p>Se mezclan: 5.4 g Al, 21.3 g Cl₂ y 24.0 g NaOH. Identifica el reactivo limitante.</p>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">1</span> Calcular moles:</p>
+                    <div class="formula">n(Al) = 5.4 g / 27 g/mol = 0.20 mol</div>
+                    <div class="formula">n(Cl₂) = 21.3 g / 71 g/mol = 0.30 mol</div>
+                    <div class="formula">n(NaOH) = 24.0 g / 40 g/mol = 0.60 mol</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">2</span> Dividir entre coeficientes:</p>
+                    <div class="formula">Al: 0.20 / 2 = 0.10</div>
+                    <div class="formula">Cl₂: 0.30 / 3 = 0.10</div>
+                    <div class="formula">NaOH: 0.60 / 6 = 0.10</div>
+                </div>
+                
+                <p><strong>Resultado:</strong> Todos tienen el mismo cociente (0.10), por tanto la mezcla es estequiométrica. No hay reactivo limitante.</p>
+            </div>
+            
+            <div class="interactive-container">
+                <h3>Identificador de Reactivo Limitante</h3>
+                <p>Para la reacción: 2A + 3B → C</p>
+                
+                <div class="input-group">
+                    <label for="reactantA-moles">Moles de A:</label>
+                    <input type="number" id="reactantA-moles" value="4" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label for="reactantB-moles">Moles de B:</label>
+                    <input type="number" id="reactantB-moles" value="5" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label for="coeffA">Coeficiente de A:</label>
+                    <input type="number" id="coeffA" value="2" min="1">
+                </div>
+                
+                <div class="input-group">
+                    <label for="coeffB">Coeficiente de B:</label>
+                    <input type="number" id="coeffB" value="3" min="1">
+                </div>
+                
+                <button class="calculate-btn" onclick="identifyLimitingReactant()">Identificar Reactivo Limitante</button>
+                <div class="result" id="limiting-reactant-result">
+                    <h4>Resultado:</h4>
+                    <p id="limiting-reactant-value"></p>
+                    <p id="excess-reactant-value"></p>
+                </div>
+            </div>
+            
+            <div class="exercise">
+                <h3>Ejercicio Práctico: Síntesis de amoníaco</h3>
+                <p>En una fábrica se mezclan 100 kg de N₂ y 20 kg de H₂ para producir amoníaco (NH₃):</p>
+                <div class="formula">N₂ + 3H₂ → 2NH₃</div>
+                <p>a) Identifica el reactivo limitante.</p>
+                <p>b) Calcula la masa de NH₃ que se puede producir.</p>
+                <p>c) Calcula la masa del reactivo en exceso que queda sin reaccionar.</p>
+                <button class="show-hint" onclick="showHint('limiting-exercise-hint')">Mostrar solución</button>
+                <div class="hint" id="limiting-exercise-hint">
+                    <p><strong>Solución:</strong></p>
+                    <p>a) n(N₂) = 100,000 g / 28 g/mol = 3571 mol</p>
+                    <p>n(H₂) = 20,000 g / 2 g/mol = 10,000 mol</p>
+                    <p>Cociente N₂: 3571 / 1 = 3571</p>
+                    <p>Cociente H₂: 10,000 / 3 = 3333</p>
+                    <p>H₂ tiene cociente menor → H₂ es el reactivo limitante</p>
+                    <p>b) 3 mol H₂ producen 2 mol NH₃ → n(NH₃) = 10,000 × (2/3) = 6667 mol</p>
+                    <p>m(NH₃) = 6667 mol × 17 g/mol = 113,333 g = 113.3 kg</p>
+                    <p>c) 3 mol H₂ reaccionan con 1 mol N₂ → n(N₂ que reacciona) = 10,000 / 3 = 3333 mol</p>
+                    <p>m(N₂ que reacciona) = 3333 mol × 28 g/mol = 93,333 g = 93.3 kg</p>
+                    <p>N₂ en exceso: 100 kg - 93.3 kg = 6.7 kg</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Ejemplo para Rendimiento -->
+    <div id="rendimiento-ejemplo-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('rendimiento-ejemplo-modal')">&times;</span>
+            <h2 class="modal-title">Ejemplos: Rendimiento de Reacciones</h2>
+            
+            <div class="example-container">
+                <h3 class="example-title">Ejemplo 1: Síntesis de aspirina</h3>
+                <p>En la síntesis de aspirina: C₇H₆O₃ + C₄H₆O₃ → C₉H₈O₄ + C₂H₄O₂</p>
+                <p>(ácido salicílico + anhídrido acético → aspirina + ácido acético)</p>
+                
+                <p>Un estudiante usa 5.00 g de ácido salicílico (M=138 g/mol) y obtiene 4.35 g de aspirina (M=180 g/mol).</p>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">1</span> Calcular rendimiento teórico:</p>
+                    <div class="formula">n(ácido salicílico) = 5.00 g / 138 g/mol = 0.0362 mol</div>
+                    <p>1 mol produce 1 mol de aspirina → n(aspirina teórica) = 0.0362 mol</p>
+                    <div class="formula">m(aspirina teórica) = 0.0362 mol × 180 g/mol = 6.52 g</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">2</span> Calcular rendimiento porcentual:</p>
+                    <div class="formula">% Rendimiento = (4.35 g / 6.52 g) × 100% = 66.7%</div>
+                </div>
+                
+                <p><strong>Interpretación:</strong> El estudiante obtuvo el 66.7% del producto máximo teórico.</p>
+            </div>
+            
+            <div class="example-container">
+                <h3 class="example-title">Ejemplo 2: Reacción con reactivo limitante y rendimiento</h3>
+                <p>Para: 2Na + Cl₂ → 2NaCl</p>
+                <p>Se hacen reaccionar 10.0 g de Na con 15.0 g de Cl₂, obteniéndose 18.5 g de NaCl.</p>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">1</span> Identificar reactivo limitante:</p>
+                    <div class="formula">n(Na) = 10.0 g / 23 g/mol = 0.435 mol</div>
+                    <div class="formula">n(Cl₂) = 15.0 g / 71 g/mol = 0.211 mol</div>
+                    <p>Cociente Na: 0.435 / 2 = 0.218, Cociente Cl₂: 0.211 / 1 = 0.211</p>
+                    <p>Na tiene cociente menor → Na es el reactivo limitante</p>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">2</span> Calcular rendimiento teórico:</p>
+                    <p>2 mol Na producen 2 mol NaCl → n(NaCl teórico) = 0.435 mol</p>
+                    <div class="formula">m(NaCl teórico) = 0.435 mol × 58.5 g/mol = 25.4 g</div>
+                </div>
+                
+                <div class="step-by-step">
+                    <p><span class="step-number">3</span> Calcular rendimiento porcentual:</p>
+                    <div class="formula">% Rendimiento = (18.5 g / 25.4 g) × 100% = 72.8%</div>
+                </div>
+            </div>
+            
+            <div class="interactive-container">
+                <h3>Calculadora de Rendimiento</h3>
+                
+                <div class="input-group">
+                    <label for="theoretical-yield">Rendimiento teórico (g):</label>
+                    <input type="number" id="theoretical-yield" value="100" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label for="actual-yield">Rendimiento real/experimental (g):</label>
+                    <input type="number" id="actual-yield" value="75" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label for="purity">Pureza del reactivo (%):</label>
+                    <input type="number" id="purity" value="100" step="1" min="0" max="100">
+                </div>
+                
+                <button class="calculate-btn" onclick="calculateYield()">Calcular % Rendimiento</button>
+                <div class="result" id="yield-result">
+                    <h4>Resultado:</h4>
+                    <p id="yield-value"></p>
+                    <p id="yield-interpretation"></p>
+                </div>
+            </div>
+            
+            <div class="exercise">
+                <h3>Ejercicio Práctico: Síntesis industrial</h3>
+                <p>En la síntesis del sulfato de amonio: 2NH₃ + H₂SO₄ → (NH₄)₂SO₄</p>
+                <p>Una planta química usa 1000 kg de amoníaco (pureza 95%) y ácido sulfúrico en exceso.</p>
+                <p>a) Calcula el rendimiento teórico de sulfato de amonio.</p>
+                <p>b) Si se obtienen 2500 kg del producto, calcula el rendimiento porcentual.</p>
+                <p>c) Si el rendimiento fuera del 85%, ¿cuánto producto se obtendría?</p>
+                <button class="show-hint" onclick="showHint('yield-exercise-hint')">Mostrar solución</button>
+                <div class="hint" id="yield-exercise-hint">
+                    <p><strong>Solución:</strong></p>
+                    <p>a) NH₃ puro: 1000 kg × 0.95 = 950 kg = 950,000 g</p>
+                    <p>M(NH₃) = 17 g/mol → n(NH₃) = 950,000 / 17 = 55,882 mol</p>
+                    <p>2 mol NH₃ producen 1 mol (NH₄)₂SO₄ → n(producto) = 55,882 / 2 = 27,941 mol</p>
+                    <p>M((NH₄)₂SO₄) = 132 g/mol → m(teórica) = 27,941 × 132 = 3,688,000 g = 3688 kg</p>
+                    <p>b) % Rendimiento = (2500 kg / 3688 kg) × 100% = 67.8%</p>
+                    <p>c) Con 85% rendimiento: m(producto) = 3688 kg × 0.85 = 3135 kg</p>
+                </div>
+            </div>
+            
+            <div class="key-point">
+                <h3>Factores que Afectan el Rendimiento</h3>
+                <ul>
+                    <li><strong>Pureza de reactivos:</strong> Reactivos impuros reducen el rendimiento.</li>
+                    <li><strong>Reacciones secundarias:</strong> Pueden consumir reactivos sin producir el producto deseado.</li>
+                    <li><strong>Condiciones de reacción:</strong> Temperatura, presión y tiempo inadecuados.</li>
+                    <li><strong>Pérdidas en manipulación:</strong> Durante filtración, transferencia, etc.</li>
+                    <li><strong>Equilibrio químico:</strong> En reacciones reversibles, nunca se completa al 100%.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Mapa Mental Interactivo de Química - Del Átomo a la Estequiometría</p>
+        <p>© 2023 - Diseñado para estudiantes universitarios (17-20 años)</p>
+        <p>Conceptos basados en "Química: Del Átomo a la Estequiometría"</p>
+        <p><i class="fas fa-github"></i> Disponible en GitHub Pages</p>
+    </footer>
+    
+    <script>
+        // Funciones para abrir y cerrar modales
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+        
+        // Cerrar modal al hacer clic fuera del contenido
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+        
+        // Mostrar pistas en ejercicios
+        function showHint(hintId) {
+            const hint = document.getElementById(hintId);
+            if (hint.style.display === "block") {
+                hint.style.display = "none";
+            } else {
+                hint.style.display = "block";
+            }
+        }
+        
+        // ========== CALCULADORAS INTERACTIVAS ==========
+        
+        // 1. Calculadora de masa atómica promedio
+        function calculateAtomicMass() {
+            const mass1 = parseFloat(document.getElementById('iso1-mass').value);
+            const abun1 = parseFloat(document.getElementById('iso1-abun').value);
+            const mass2 = parseFloat(document.getElementById('iso2-mass').value);
+            const abun2 = parseFloat(document.getElementById('iso2-abun').value);
+            const mass3 = parseFloat(document.getElementById('iso3-mass').value);
+            const abun3 = parseFloat(document.getElementById('iso3-abun').value);
+            
+            // Validar que al menos dos isótopos tengan valores
+            if (isNaN(mass1) || isNaN(abun1) || isNaN(mass2) || isNaN(abun2)) {
+                alert("Por favor, ingresa valores para al menos los dos primeros isótopos.");
+                return;
+            }
+            
+            let totalAbundance = abun1 + abun2;
+            let averageMass = (mass1 * abun1/100) + (mass2 * abun2/100);
+            
+            // Si hay tercer isótopo
+            if (!isNaN(mass3) && !isNaN(abun3) && mass3 > 0 && abun3 > 0) {
+                totalAbundance += abun3;
+                averageMass += (mass3 * abun3/100);
+            }
+            
+            // Verificar que la suma de abundancias sea cercana a 100%
+            if (Math.abs(totalAbundance - 100) > 0.1) {
+                document.getElementById('atomic-mass-value').innerHTML = 
+                    `Masa promedio calculada: ${averageMass.toFixed(4)} uma<br>
+                     <span style="color: #d32f2f;">Advertencia: La suma de abundancias es ${totalAbundance.toFixed(2)}%, debería ser 100%</span>`;
+            } else {
+                document.getElementById('atomic-mass-value').innerHTML = 
+                    `Masa atómica promedio = ${averageMass.toFixed(4)} uma`;
+            }
+            
+            document.getElementById('atomic-mass-result').style.display = "block";
+        }
+        
+        // 2. Conversor de moles
+        function performMoleConversion() {
+            const conversionType = document.getElementById('conversion-type').value;
+            const inputValue = parseFloat(document.getElementById('input-value').value);
+            const molarMass = parseFloat(document.getElementById('molar-mass-value').value);
+            
+            if (isNaN(inputValue) || isNaN(molarMass) || molarMass <= 0) {
+                alert("Por favor, ingresa valores válidos.");
+                return;
+            }
+            
+            let result = "";
+            
+            switch(conversionType) {
+                case "mass-to-moles":
+                    const moles1 = inputValue / molarMass;
+                    result = `${inputValue} g corresponden a ${moles1.toFixed(4)} moles`;
+                    break;
+                    
+                case "moles-to-mass":
+                    const mass = inputValue * molarMass;
+                    result = `${inputValue} moles corresponden a ${mass.toFixed(4)} g`;
+                    break;
+                    
+                case "mass-to-particles":
+                    const moles2 = inputValue / molarMass;
+                    const particles1 = moles2 * 6.022e23;
+                    result = `${inputValue} g corresponden a ${particles1.toExponential(3)} partículas`;
+                    break;
+                    
+                case "moles-to-particles":
+                    const particles2 = inputValue * 6.022e23;
+                    result = `${inputValue} moles corresponden a ${particles2.toExponential(3)} partículas`;
+                    break;
+            }
+            
+            document.getElementById('conversion-value').innerHTML = result;
+            document.getElementById('conversion-result').style.display = "block";
+        }
+        
+        // 3. Calculadora de composición porcentual
+        function calculatePercentComposition() {
+            const formula = document.getElementById('compound-formula').value.trim();
+            
+            // Esta es una función simplificada - en una aplicación real necesitarías
+            // un parser de fórmulas químicas más sofisticado
+            if (formula === "" || formula === "H2O") {
+                // Ejemplo para H2O
+                const elements = [
+                    { symbol: "H", count: 2, mass: 1.008 },
+                    { symbol: "O", count: 1, mass: 16.00 }
+                ];
+                displayComposition(elements, "H₂O");
+            } else if (formula.toUpperCase() === "CO2" || formula === "CO2") {
+                const elements = [
+                    { symbol: "C", count: 1, mass: 12.01 },
+                    { symbol: "O", count: 2, mass: 16.00 }
+                ];
+                displayComposition(elements, "CO₂");
+            } else if (formula.toUpperCase() === "C6H12O6" || formula === "C6H12O6") {
+                const elements = [
+                    { symbol: "C", count: 6, mass: 12.01 },
+                    { symbol: "H", count: 12, mass: 1.008 },
+                    { symbol: "O", count: 6, mass: 16.00 }
+                ];
+                displayComposition(elements, "C₆H₁₂O₆");
+            } else if (formula.toUpperCase() === "NACL" || formula === "NaCl") {
+                const elements = [
+                    { symbol: "Na", count: 1, mass: 22.99 },
+                    { symbol: "Cl", count: 1, mass: 35.45 }
+                ];
+                displayComposition(elements, "NaCl");
+            } else {
+                alert("Esta calculadora solo funciona para ejemplos específicos: H2O, CO2, C6H12O6, NaCl. En una aplicación completa, se implementaría un parser de fórmulas.");
+                return;
+            }
+            
+            document.getElementById('composition-result').style.display = "block";
+        }
+        
+        function displayComposition(elements, formulaName) {
+            let totalMass = 0;
+            let compositionHTML = `<p>Para ${formulaName}:</p><ul>`;
+            
+            // Calcular masa total
+            elements.forEach(element => {
+                totalMass += element.count * element.mass;
+            });
+            
+            // Calcular y mostrar porcentajes
+            elements.forEach(element => {
+                const elementMass = element.count * element.mass;
+                const percentage = (elementMass / totalMass) * 100;
+                compositionHTML += `<li>${element.symbol}: ${percentage.toFixed(2)}%</li>`;
+            });
+            
+            compositionHTML += `</ul><p>Masa molar: ${totalMass.toFixed(2)} g/mol</p>`;
+            document.getElementById('composition-value').innerHTML = compositionHTML;
+        }
+        
+        // 4. Calculadora estequiométrica
+        function calculateStoichiometry() {
+            const massInput = parseFloat(document.getElementById('stoich-mass').value);
+            const reactant = document.getElementById('reactant-type').value;
+            const product = document.getElementById('product-type').value;
+            
+            if (isNaN(massInput) || massInput <= 0) {
+                alert("Por favor, ingresa una masa válida.");
+                return;
+            }
+            
+            let result = "";
+            
+            // Para la reacción: N₂ + 3H₂ → 2NH₃
+            if (reactant === "N2" && product === "NH3") {
+                const molesN2 = massInput / 28;
+                const molesNH3 = molesN2 * 2; // Relación 1:2
+                const massNH3 = molesNH3 * 17;
+                result = `${massInput} g de N₂ producen ${massNH3.toFixed(2)} g de NH₃`;
+            } else if (reactant === "H2" && product === "NH3") {
+                const molesH2 = massInput / 2;
+                const molesNH3 = molesH2 * (2/3); // Relación 3:2
+                const massNH3 = molesNH3 * 17;
+                result = `${massInput} g de H₂ producen ${massNH3.toFixed(2)} g de NH₃`;
+            } else if (reactant === "N2" && product === "other-reactant") {
+                const molesN2 = massInput / 28;
+                const molesH2 = molesN2 * 3; // Relación 1:3
+                const massH2 = molesH2 * 2;
+                result = `${massInput} g de N₂ requieren ${massH2.toFixed(2)} g de H₂`;
+            } else if (reactant === "H2" && product === "other-reactant") {
+                const molesH2 = massInput / 2;
+                const molesN2 = molesH2 / 3; // Relación 3:1
+                const massN2 = molesN2 * 28;
+                result = `${massInput} g de H₂ requieren ${massN2.toFixed(2)} g de N₂`;
+            }
+            
+            document.getElementById('stoichiometry-value').innerHTML = result;
+            document.getElementById('stoichiometry-result').style.display = "block";
+        }
+        
+        // 5. Identificador de reactivo limitante
+        function identifyLimitingReactant() {
+            const molesA = parseFloat(document.getElementById('reactantA-moles').value);
+            const molesB = parseFloat(document.getElementById('reactantB-moles').value);
+            const coeffA = parseInt(document.getElementById('coeffA').value);
+            const coeffB = parseInt(document.getElementById('coeffB').value);
+            
+            if (isNaN(molesA) || isNaN(molesB) || isNaN(coeffA) || isNaN(coeffB) || coeffA <= 0 || coeffB <= 0) {
+                alert("Por favor, ingresa valores válidos.");
+                return;
+            }
+            
+            const ratioA = molesA / coeffA;
+            const ratioB = molesB / coeffB;
+            
+            let limiting, excess, excessMoles;
+            
+            if (ratioA < ratioB) {
+                limiting = "A";
+                excess = "B";
+                // Calcular moles de B en exceso
+                const molesBNeeded = (molesA / coeffA) * coeffB;
+                excessMoles = molesB - molesBNeeded;
+            } else if (ratioB < ratioA) {
+                limiting = "B";
+                excess = "A";
+                // Calcular moles de A en exceso
+                const molesANeeded = (molesB / coeffB) * coeffA;
+                excessMoles = molesA - molesANeeded;
+            } else {
+                limiting = "ninguno (mezcla estequiométrica)";
+                excess = "ninguno";
+                excessMoles = 0;
+            }
+            
+            let result = `Reactivo limitante: ${limiting}`;
+            if (excessMoles > 0) {
+                result += `<br>Reactivo en exceso: ${excess} (${excessMoles.toFixed(2)} moles en exceso)`;
+            }
+            
+            document.getElementById('limiting-reactant-value').innerHTML = result;
+            document.getElementById('limiting-reactant-result').style.display = "block";
+        }
+        
+        // 6. Calculadora de rendimiento
+        function calculateYield() {
+            const theoretical = parseFloat(document.getElementById('theoretical-yield').value);
+            const actual = parseFloat(document.getElementById('actual-yield').value);
+            const purity = parseFloat(document.getElementById('purity').value);
+            
+            if (isNaN(theoretical) || isNaN(actual) || isNaN(purity) || theoretical <= 0) {
+                alert("Por favor, ingresa valores válidos.");
+                return;
+            }
+            
+            // Ajustar rendimiento teórico por pureza
+            const adjustedTheoretical = theoretical * (purity / 100);
+            
+            const percentage = (actual / adjustedTheoretical) * 100;
+            
+            let interpretation = "";
+            if (percentage >= 90) {
+                interpretation = "Excelente rendimiento";
+            } else if (percentage >= 70) {
+                interpretation = "Buen rendimiento";
+            } else if (percentage >= 50) {
+                interpretation = "Rendimiento moderado";
+            } else if (percentage >= 30) {
+                interpretation = "Rendimiento bajo - revisar procedimiento";
+            } else {
+                interpretation = "Rendimiento muy bajo - hay problemas serios en el proceso";
+            }
+            
+            let result = `% Rendimiento = ${percentage.toFixed(1)}%`;
+            if (purity < 100) {
+                result += `<br>(considerando pureza del ${purity}%)`;
+            }
+            
+            document.getElementById('yield-value').innerHTML = result;
+            document.getElementById('yield-interpretation').innerHTML = interpretation;
+            document.getElementById('yield-result').style.display = "block";
+        }
+        
+        // Inicializar algunos ejemplos por defecto al cargar la página
+        window.onload = function() {
+            // Configurar valores por defecto para demostración
+            console.log("Mapa mental de química cargado correctamente");
+        }
+    </script>
+</body>
+</html>
